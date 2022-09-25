@@ -1,0 +1,10 @@
+*.py[co]
+__pycache__/
+.vscode
+*.egg-info
+*.pot
+*.py[co]
+.tox/
+__pycache__
+.env
+.pytest_cache
