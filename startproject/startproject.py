@@ -16,7 +16,7 @@ class StartProject():
         fpaths.chdir_project()
         os.system('python manage.py makemigrations api')
         os.system('python manage.py migrate')
-        os.system('python manage.py createsuperuser')
+        os.system('python manage.py createsuperuser --username admin --email admin@local.local --skip-check')
         os.system('python manage.py runserver 127.0.0.1:8181')
         
         return True 
