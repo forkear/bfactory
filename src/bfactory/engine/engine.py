@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 
 from asyncore import read
-import engine.tasks as tasks
-from inputdata.manifest import Manifest
-from banners import TITLE_BANNER
-from engine.render import render_to_file
+import bfactory.engine.tasks as tasks
+from bfactory.inputdata.manifest import Manifest
+from bfactory.config.settings import TITLE_BANNER
+from bfactory.engine.render import render_to_file
 
-from utils.paths import Paths
+from bfactory.utils.paths import Paths
 import os
 fpaths = Paths()
 

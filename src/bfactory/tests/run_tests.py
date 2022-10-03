@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 import unittest
 
-from tests.engine_tests import EngineTest
-from utils.paths import Paths
+from bfactory.tests.engine_tests import EngineTest
+from bfactory.utils.paths import Paths
 
 from .manifest_test import ManifestTest
 

@@ -1,8 +1,8 @@
 
 import os
-from inputdata import manifest
 import shutil
-from inputdata.manifest import Manifest
+from bfactory.inputdata import manifest
+from bfactory.inputdata.manifest import Manifest
 
 
 class Singleton (type):

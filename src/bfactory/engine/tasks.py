@@ -7,11 +7,11 @@ import shutil
 from zipfile import ZipFile
 from urllib.request import urlopen
 import os
-from inputdata.manifest import Manifest
-import settings
-from engine.render import render_to_file
-from utils.crypto import get_random_secret_key
-from utils.paths import Paths
+from bfactory.inputdata.manifest import Manifest
+from bfactory.config.settings import URL_BASE_BACKEND
+from bfactory.engine.render import render_to_file
+from bfactory.utils.crypto import get_random_secret_key
+from bfactory.utils.paths import Paths
 
 fpaths = Paths()
 
@@ -29,7 +29,7 @@ def get_zip_base_project(slug: str, path: str = None) -> bool:
     if not path:
         path = fpaths.base_path
 
-    resp = urlopen(settings.URL_BASE_BACKEND)
+    resp = urlopen(URL_BASE_BACKEND)
 
     base_path_name = os.path.join(path, slug)
 

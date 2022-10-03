@@ -2,7 +2,7 @@ from typing import Dict
 from jinja2 import Environment, PackageLoader, select_autoescape
 
 env = Environment(
-    loader=PackageLoader("engine"),
+    loader=PackageLoader("bfactory.engine"),
     autoescape=select_autoescape()
 )
 

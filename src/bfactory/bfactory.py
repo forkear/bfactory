@@ -1,20 +1,20 @@
 #!/usr/bin/env python
-#import sys
 
 import argparse
 import pathlib
 
 import textwrap
-from banners import TITLE_BANNER
-from inputdata.manifest import Manifest
-from inputdata.validators import ManifestFileType
-from tests.run_tests import run_tests
-from utils.paths import Paths
-from engine import engine
-from startproject.startproject import StartProject
+from bfactory.config.settings import TITLE_BANNER
+from bfactory.inputdata.manifest import Manifest
+from bfactory.inputdata.validators import ManifestFileType
+from bfactory.tests.run_tests import run_tests
+from bfactory.utils.paths import Paths
+from bfactory.engine import engine
+from bfactory.startproject.startproject import StartProject
 
 
 fpaths = Paths()
+
 
 
 class TestAction(argparse.Action):
@@ -83,7 +83,9 @@ parser.add_argument(
 )
 
 
-if __name__ == '__main__':
+
+def main():
+ 
 
     args = parser.parse_args()
 
@@ -105,12 +107,17 @@ if __name__ == '__main__':
         fpaths.manifest = manifest
         fpaths.to_path = to_path
 
-        engine = engine.Engine(manifest=manifest)
+        eng = engine.Engine(manifest=manifest)
         
-        if engine.create_api() and run_api:
-            sp = StartProject(engine=engine)
+        if eng.create_api() and run_api:
+            sp = StartProject(engine=eng)
             sp.run()
 
     except Exception as e:
         print(f"[ E ] >> {e}")
         exit(3)
+
+
+
+if __name__ == '__main__':
+    main()

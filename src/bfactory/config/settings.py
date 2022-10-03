@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+
+__version__ = '0.0.3'
+
 TITLE_BANNER='''\
 
 ██████╗ ███████╗ █████╗  ██████╗████████╗ ██████╗ ██████╗ ██╗   ██╗
@@ -8,3 +12,6 @@ TITLE_BANNER='''\
 ╚═════╝ ╚═╝     ╚═╝  ╚═╝ ╚═════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝   ╚═╝   
                                                                    
 '''
+
+URL_BASE_BACKEND = "https://github.com/forkear/forkear-backend/archive/refs/heads/main.zip"
+

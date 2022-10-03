@@ -1,8 +1,8 @@
 
-from engine.engine import Engine
 import os
+from bfactory.engine.engine import Engine
+from bfactory.utils.paths import Paths 
 
-from utils.paths import Paths 
 
 fpaths=Paths()
 

@@ -9,3 +9,5 @@ __pycache__
 .env
 .pytest_cache
 *.sh
+build/
+dist/
