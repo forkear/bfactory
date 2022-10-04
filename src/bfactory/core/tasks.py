@@ -7,9 +7,9 @@ import shutil
 from zipfile import ZipFile
 from urllib.request import urlopen
 import os
-from bfactory.inputdata.manifest import Manifest
+from bfactory.inputs.manifest import Manifest
 from bfactory.config.settings import URL_BASE_BACKEND
-from bfactory.engine.render import render_to_file
+from bfactory.utils.render import render_to_file
 from bfactory.utils.crypto import get_random_secret_key
 from bfactory.utils.paths import Paths
 

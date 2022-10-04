@@ -1,8 +1,11 @@
+#!/usr/bin/env python
+# -*- encoding: utf-8 -*-
+
 
 import os
 import shutil
-from bfactory.inputdata import manifest
-from bfactory.inputdata.manifest import Manifest
+from bfactory.inputs import manifest
+from bfactory.inputs.manifest import Manifest
 
 
 class Singleton (type):

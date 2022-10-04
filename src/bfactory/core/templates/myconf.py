@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- encoding: utf-8 -*-
 
 from datetime import timedelta
 from .settings import INSTALLED_APPS

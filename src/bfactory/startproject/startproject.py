@@ -1,11 +1,12 @@
+#!/usr/bin/env python
+# -*- encoding: utf-8 -*-
 
 import os
-from bfactory.engine.engine import Engine
+from bfactory.core.engine import Engine
 from bfactory.utils.paths import Paths 
 
 
 fpaths=Paths()
-
 
 class StartProject():
 

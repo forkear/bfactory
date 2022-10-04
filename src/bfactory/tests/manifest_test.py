@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import unittest
 
-from bfactory.inputdata.manifest import Manifest
+from bfactory.inputs.manifest import Manifest
 
 class ManifestTest(unittest.TestCase):
 

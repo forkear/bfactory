@@ -1,13 +1,8 @@
 #!/usr/bin/env python
 import unittest
 
+from bfactory.tests.manifest_test import ManifestTest
 from bfactory.tests.engine_tests import EngineTest
-from bfactory.utils.paths import Paths
-
-from .manifest_test import ManifestTest
-
-
-#fpaths = Paths()
 
 
 def create_suite(classes, unit_tests_to_run):

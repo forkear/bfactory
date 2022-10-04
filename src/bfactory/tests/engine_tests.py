@@ -1,10 +1,8 @@
 #!/usr/bin/env python
 import unittest
 
-from bfactory.inputdata.manifest import Manifest
-from bfactory.engine.engine import Engine
-
-
+from bfactory.inputs.manifest import Manifest
+from bfactory.core.engine import Engine
 from bfactory.utils.paths import Paths
 
 fpaths = Paths()

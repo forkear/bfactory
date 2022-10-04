@@ -1,13 +1,13 @@
 #!/usr/bin/env python
+# -*- encoding: utf-8 -*-
 
-from asyncore import read
-import bfactory.engine.tasks as tasks
-from bfactory.inputdata.manifest import Manifest
-from bfactory.config.settings import TITLE_BANNER
-from bfactory.engine.render import render_to_file
-
-from bfactory.utils.paths import Paths
 import os
+from bfactory.core import tasks 
+from bfactory.inputs.manifest import Manifest
+from bfactory.config.settings import TITLE_BANNER
+from bfactory.utils.render import render_to_file
+from bfactory.utils.paths import Paths
+
 fpaths = Paths()
 
 
@@ -45,11 +45,6 @@ class Engine():
         self._create_views()
 
         self._create_urls()
-
-
-
-        #self._create_serilizadores()
-        
         
         return True 
 
@@ -77,7 +72,6 @@ class Engine():
 
 
     def _create_services(self) -> None:
-
         values = {
             'models':self.manifest.get_models(),
         } 
@@ -133,7 +127,6 @@ class Engine():
 
 
     def _create_readme(self) -> None:
-
         values = {
             'banner':TITLE_BANNER,
             'app_name':self.manifest.app_name,

@@ -47,6 +47,9 @@ class Database:
 
 
 class Manifest():
+    """
+        Manifest
+    """
     
     def __init__(self, file_path_manifest: str ):
         self.file_path_manifest=file_path_manifest 
