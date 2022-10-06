@@ -88,4 +88,9 @@ class Paths(metaclass=Singleton):
         os.chdir(path)
     
     def abspath(self, relative_path: str) -> str:
-        return os.path.abspath(relative_path)
+        """
+        retorna el path absoluto en base al path de bfactory
+        """
+        import bfactory
+        return os.path.join(os.path.dirname(bfactory.__file__), relative_path)
+        
