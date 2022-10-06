@@ -14,14 +14,12 @@ class EngineTest(unittest.TestCase):
         to_path = '/tmp/test_bfactory'
         if not fpaths.check_path(to_path, force=True):
             exit(2)
-        path_manifest = 'bfactory/tests/manifest_test.json'
-        force = False
-
-        manifest = Manifest(file_path_manifest=path_manifest)
-        fpaths.manifest = manifest    
+        self.manifest_path = fpaths.abspath('bfactory/tests/manifest_test.json')
+        self.manifest = Manifest(file_path_manifest=self.manifest_path)
+        fpaths.manifest = self.manifest    
         fpaths.to_path = to_path
-        fpaths.check_path(to_path, force)
-        self.engine = Engine(manifest=manifest)
+        fpaths.check_path(to_path, force=False)
+        self.engine = Engine(manifest=self.manifest)
 
     def test_model_creation(self):
         self.engine.create_api()

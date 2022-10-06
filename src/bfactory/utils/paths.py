@@ -86,3 +86,6 @@ class Paths(metaclass=Singleton):
     def mk_and_ch_dir(self, path: str) -> None:
         os.mkdir(path)
         os.chdir(path)
+    
+    def abspath(self, relative_path: str) -> str:
+        return os.path.abspath(relative_path)

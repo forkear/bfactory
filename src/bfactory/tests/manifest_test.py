@@ -2,12 +2,14 @@
 import unittest
 
 from bfactory.inputs.manifest import Manifest
+from bfactory.utils.paths import Paths
+fpaths = Paths()
 
 class ManifestTest(unittest.TestCase):
 
     @classmethod
     def setUp(self):
-        self.manifest_path = 'bfactory/tests/manifest_test.json'
+        self.manifest_path = fpaths.abspath('bfactory/tests/manifest_test.json')
         self.manifest = Manifest(file_path_manifest=self.manifest_path)
 
     def test_version(self):
