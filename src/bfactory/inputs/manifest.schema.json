@@ -1,0 +1,101 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://raw.githubusercontent.com/forkear/bfactory/main/src/bfactory/inputs/manifest.schema.json",
+    "title": "bfactory Manifest", 
+    "description": "bfactory manifest",
+    "type": "object",
+    "properties": {
+      "name": {
+        "description": "The name of your backend",
+        "type": "string"
+      },
+      "version": {
+        "description": "The version of your backend",
+        "type": "string"
+      },
+      "auth":{
+        "description": "the type of auth to use jwt/token",
+        "enum": ["jwt", "token"]
+      },
+      
+      "database":{
+        "type":"object",
+        "properties": {
+          "type": { 
+            "descripcion": "The type of database: sqlite | postgres",
+            "enum": ["sqlite", "postgres"]
+          },
+          "name": { 
+            "descripcion": "The name of the database ej: database.sqlite",
+            "type": "string" 
+          },
+          "username": { 
+            "type": "string" 
+          },
+          "password": { 
+            "type": "string" 
+          },
+          "host": { 
+            "type": "string" 
+          },
+          "port": { 
+            "type": "string" 
+          }
+        },
+
+        "anyOf": [
+          {
+            "properties": {
+              "type": { "const": "postgres" }
+            },
+            "required": ["name", "username", "password", "host", "port"]
+          },
+          {
+            "properties": {
+              "type": { "const": "sqlite" }
+            },
+            "required": ["name"]
+          }
+        ]
+        
+      },
+
+      "schema":{
+        "description": "The model",
+        "type": "array",
+        "items": {
+          "type":"object",
+          "properties": {
+            "name":{
+              "description": "The model name",
+              "type":"string"
+            },
+            "attrs":{
+              "description": "The model attributes",
+              "type": "array",
+              "items": {
+                  "type":"object",
+                  "properties": {
+                    "name": { 
+                      "type": "string" 
+                    },
+                    "type": { 
+                      "enum": [ "str", "bool", "User", "fk" ] 
+                    },
+                    "req": { 
+                      "type": "boolean" 
+                    },
+                    "default": { 
+                      "type": [ "string", "boolean" ] 
+                    }
+                  },
+                  "required": [ "name", "type" ]
+              }
+            }
+          }
+        }
+      }
+
+    },
+    "required": [ "name", "version", "auth"]
+  }
