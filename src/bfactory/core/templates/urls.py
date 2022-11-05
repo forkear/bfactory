@@ -7,14 +7,15 @@ from django.urls import path, include
 from django.conf import settings
 
 router = routers.SimpleRouter()
-#router.register(r'users', UserViewSet)
-#router.register(r'accounts', AccountViewSet)
 
 from .views import *
 
 urlpatterns = [
+    path('', api_root, name='api_root'),
     {% for model in models %}
-    path('{{model.name|lower}}s/', {{model.name}}ListApi.as_view()){%- if not loop.last %},{% endif %}
+    path('{{model.name|lower}}s/', {{model.name}}ListAPIView.as_view(), name='{{model.name|lower}}s-list'),
+    path('{{model.name|lower}}s/<int:id>/', {{model.name}}APIView.as_view()){%- if not loop.last %},{% endif %}
+    
     {% endfor %}
 ]
 

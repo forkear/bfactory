@@ -25,7 +25,7 @@ def get_zip_base_project(slug: str, path: str = None) -> bool:
         para que sea igual que el slug de nuestra api autogenerada
     """
 
-    print("> geting main.zip")
+    print("> descargando main.zip")
     if not path:
         path = fpaths.base_path
 
@@ -33,7 +33,7 @@ def get_zip_base_project(slug: str, path: str = None) -> bool:
 
     base_path_name = os.path.join(path, slug)
 
-    print("> main.zip in memory ")
+    print("> main.zip en memoria")
 
     zipfile = ZipFile(BytesIO(resp.read()))
 
@@ -43,7 +43,7 @@ def get_zip_base_project(slug: str, path: str = None) -> bool:
     shutil.rmtree(base_path_name, ignore_errors=True)
 
     # renombramos directorios base
-    print("> renombramos directorios ")
+    print("> renombramos directorios")
 
     os.rename('forkear-backend-main/forkear-backend',
               f'forkear-backend-main/{slug}')
