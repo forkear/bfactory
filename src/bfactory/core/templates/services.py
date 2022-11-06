@@ -5,6 +5,7 @@
 from  django.db import models
 from django.contrib.auth.models import User
 from django.db import transaction
+from datetime import datetime
 
 {% for model in models %}from .models import {{model.name}}
 {% endfor %}
@@ -17,8 +18,8 @@ class {{model.name}}Service:
     
     @transaction.atomic
     def create(
-        self,{% for field in model.fields %}
-        {{field.name}}: {{field.type}},{%endfor%}
+        self,{%- for field in model.fields %}
+        {{field.name}}: {%- include "helpers/field_type_linting.py" -%},{%endfor -%}
     ) -> {{model.name}}:
 
         {{model.name|lower}} = {{model.name}}({% for field in model.fields %}
@@ -35,7 +36,7 @@ class {{model.name}}Service:
     def update(
         self,
         {{model.name|lower}}: {{model.name}}, {% for field in model.fields %}
-        {{field.name}}: {{field.type}},{%endfor%}
+        {{field.name}}: {% include "helpers/field_type_linting.py" %},{%endfor%}
     ) -> {{model.name}}:
         {% for field in model.fields %}
         {{model.name|lower}}.{{field.name}}={{field.name}}{%endfor%}

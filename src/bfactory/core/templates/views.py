@@ -63,7 +63,9 @@ class {{model.name}}ListAPIView(ListAPIView):
 
         {{model.name|lower}} = service.create(
             {% for field in model.fields -%}
-            {% if field.type == 'User' %}{{field.name}}=self.request.user{% else %}{{field.name}} = serializer.validated_data['{{field.name}}'],
+            {% if field.type == 'owner' %}{{field.name}}=self.request.user,
+            {% else %}
+            {{field.name}} = serializer.validated_data['{{field.name}}'],
             {% endif %}
             {%- endfor %}
         )
