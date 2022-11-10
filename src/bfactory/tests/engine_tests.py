@@ -21,8 +21,6 @@ class EngineTest(unittest.TestCase):
         fpaths.manifest = self.manifest    
         fpaths.to_path = to_path
         
-        #fpaths.check_path(to_path, force=False)
-        
         self.engine = Engine(manifest=self.manifest)
 
     def test_model_creation(self):

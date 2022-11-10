@@ -8,13 +8,11 @@ class Field():
 
         self.name = obj['name']
         self.type = obj['type']
-        self.req = obj['req']
-        if 'default' in obj:
-            self.default = obj['default']
-        if 'fk' in obj:
-            self.fk = obj['fk']
-        else:
-            self.default = None
+        self.req  = obj['req']
+        self.default = obj.get('default',None)
+        self.fk = obj.get('fk', None)
+        self.editable = obj.get('editable', True)
+
     
     def __str__(self) -> str:
         return f"{self.name} - {self.type}"  

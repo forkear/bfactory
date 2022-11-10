@@ -18,11 +18,11 @@ class {{model.name}}Service:
     
     @transaction.atomic
     def create(
-        self,{%- for field in model.fields %}
+        self,{%- for field in model.fields if field.editable  %}
         {{field.name}}: {%- include "helpers/field_type_linting.py" -%},{%endfor -%}
     ) -> {{model.name}}:
 
-        {{model.name|lower}} = {{model.name}}({% for field in model.fields %}
+        {{model.name|lower}} = {{model.name}}({% for field in model.fields if field.editable %}
                 {{field.name}}={{field.name}},
                 {%- endfor%}
         )
@@ -35,10 +35,10 @@ class {{model.name}}Service:
     @transaction.atomic
     def update(
         self,
-        {{model.name|lower}}: {{model.name}}, {% for field in model.fields %}
+        {{model.name|lower}}: {{model.name}}, {% for field in model.fields if field.editable %}
         {{field.name}}: {% include "helpers/field_type_linting.py" %},{%endfor%}
     ) -> {{model.name}}:
-        {% for field in model.fields %}
+        {% for field in model.fields if field.editable %}
         {{model.name|lower}}.{{field.name}}={{field.name}}{%endfor%}
         
         {{model.name|lower}}.full_clean()

@@ -14,8 +14,8 @@
     models.PositiveIntegerField({% if not field.req %}null=True, blank=True{% endif %})
 {% endif %}
 {%- if field.type == 'fk' -%}
-    serializers.PrimaryKeyRelatedField(many=False, read_only=True)
+    serializers.PrimaryKeyRelatedField(many=False, queryset={{field.fk}}.objects.all(), required={{field.req}} {% if not field.req %}, allow_null=True {% endif %})
 {% endif %}
 {%- if field.type == 'datetime' -%}
-    serializers.DateTimeField({% if field.default == 'now' %}auto_now=True{% endif %}{% if not field.req %}, null=True, blank=True {% endif %})
+    serializers.DateTimeField()
 {% endif %}

@@ -39,7 +39,7 @@ class {{model.name}}ListAPIView(ListAPIView):
 
 
     class InputSerializer(serializers.Serializer):
-{% for field in model.fields -%}
+{% for field in model.fields if field.editable -%}
 {{ '    ' }}{{ '    ' }}{{field.name}} = {% include "helpers/field_serializer.py" %}
 {%- endfor %}
         
@@ -62,7 +62,7 @@ class {{model.name}}ListAPIView(ListAPIView):
         service = {{model.name}}Service(user=self.request.user)
 
         {{model.name|lower}} = service.create(
-            {% for field in model.fields -%}
+            {% for field in model.fields if field.editable -%}
             {% if field.type == 'owner' %}{{field.name}}=self.request.user,
             {% else %}
             {{field.name}} = serializer.validated_data['{{field.name}}'],
@@ -90,7 +90,7 @@ class {{model.name}}APIView(APIView):
 
 
     class InputSerializer(serializers.Serializer):
-{% for field in model.fields -%}
+{% for field in model.fields if field.editable -%}
 {{ '    ' }}{{ '    ' }}{{field.name}} = {% include "helpers/field_serializer.py" %}
 {%- endfor %}
         
@@ -119,8 +119,10 @@ class {{model.name}}APIView(APIView):
 
         {{model.name|lower}} = service.update(
             {{model.name|lower}}={{model.name|lower}},
-            {% for field in model.fields -%}
-            {% if field.type == 'User' %}{{field.name}}=self.request.user{% else %}{{field.name}} = serializer.validated_data['{{field.name}}'],
+            {% for field in model.fields if field.editable -%}
+            {% if field.type == 'owner' %}{{field.name}}=self.request.user,
+            {% else %}
+            {{field.name}} = serializer.validated_data['{{field.name}}'],
             {% endif %}
             {%- endfor %}
         )
