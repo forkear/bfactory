@@ -22,8 +22,8 @@ class TestAction(argparse.Action):
 parser = argparse.ArgumentParser(
     prog='bfactory',
     formatter_class=argparse.RawDescriptionHelpFormatter,
-    description=textwrap.dedent(TITLE_BANNER),
-    epilog='Gracias a Django',
+    #description=textwrap.dedent(TITLE_BANNER),
+    epilog='thx to:\n\tPython\n\tDjango\n\tJinja\n\tDjango REST framework',
 )
 
 

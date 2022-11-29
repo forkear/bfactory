@@ -30,8 +30,8 @@
                         "default":false
                     },
                     {
-                        "name":"owner",
-                        "type":"user",
+                        "name":"usuario",
+                        "type":"owner",
                         "req":true,
                         "default":""
                     }

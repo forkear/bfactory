@@ -2,7 +2,7 @@
 # -*- encoding: utf-8 -*-
 
 
-from  django.db import models
+from django.db import models
 from django.contrib.auth.models import User
 from django.db import transaction
 from datetime import datetime
