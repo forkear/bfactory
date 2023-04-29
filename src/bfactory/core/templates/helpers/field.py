@@ -11,6 +11,12 @@
     models.ForeignKey(User, related_name="{{model.name|lower}}_{{field.name|lower}}_user", on_delete=models.CASCADE{% if not field.req %}, null=True, blank=True{% endif %})
 {% endif %}
 {%- if field.type == 'int' -%}
+    models.IntegerField({% if not field.req %}null=True, blank=True{% endif %})
+{% endif %}
+{%- if field.type == 'float' -%}
+    models.DecimalField(max_digits=10, decimal_places=2{% if not field.req %}, null=True, blank=True{% endif %})
+{% endif %}
+{%- if field.type == 'pint' -%}
     models.PositiveIntegerField({% if not field.req %}null=True, blank=True{% endif %})
 {% endif %}
 {%- if field.type == 'fk' -%}

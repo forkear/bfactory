@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-__version__ = '0.0.3.5'
+__version__ = '0.4.1'
 
 TITLE_BANNER='''\
 

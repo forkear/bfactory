@@ -7,15 +7,21 @@
 {%- if field.type == 'bool' -%}
     serializers.BooleanField({% if not field.req %} default=False {% endif %})
 {% endif %}
-{%- if field.type == 'user' or field.type == 'owner' -%}
-    models.ForeignKey(User, on_delete=models.CASCADE{% if not field.req %}, null=True, blank=True{% endif %})
-{% endif %}
 {%- if field.type == 'int' -%}
-    models.PositiveIntegerField({% if not field.req %}null=True, blank=True{% endif %})
+    serializers.IntegerField({% if not field.req %}required=False{% endif %})
+{% endif %}
+{%- if field.type == 'pint' -%}
+    serializers.IntegerField(min_value=0{% if not field.req %}, required=False{% endif %})
 {% endif %}
 {%- if field.type == 'fk' -%}
     serializers.PrimaryKeyRelatedField(many=False, queryset={{field.fk}}.objects.all(), required={{field.req}} {% if not field.req %}, allow_null=True {% endif %})
 {% endif %}
 {%- if field.type == 'datetime' -%}
     serializers.DateTimeField()
+{% endif %}
+{%- if field.type == 'float' -%}
+    serializers.DecimalField(max_digits=10, decimal_places=2)
+{% endif %}
+{%- if field.type == 'user' or field.type == 'owner' -%}
+    serializers.PrimaryKeyRelatedField(many=False, queryset=User.objects.all(), required={{field.req}} {% if not field.req %}, allow_null=True {% endif %})
 {% endif %}
