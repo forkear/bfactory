@@ -2,6 +2,7 @@
 # -*- encoding: utf-8 -*-
 
 
+from argparse import Namespace
 import os
 import shutil
 from bfactory.inputs import manifest
@@ -14,18 +15,22 @@ class Singleton (type):
     def __call__(cls, *args, **kwargs):
 
         if cls not in cls._instances:
-            cls._instances[cls] = super(
-                Singleton, cls).__call__(*args, **kwargs)
+            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
 
         return cls._instances[cls]
 
 
-class Paths(metaclass=Singleton):
+class State(metaclass=Singleton):
 
-    manifest: Manifest = None
-    to_path: str = ""
+    update = False 
+    run = False 
+    force = False 
+    template = None
+    run_api = False 
+    create_admin = False 
 
-    def __init__(self, manifest: Manifest = None, path: str = ""):
+
+    def init(self, manifest: Manifest = None, path: str = ""):
         self.manifest = manifest
         self.to_path = path
 
@@ -70,15 +75,23 @@ class Paths(metaclass=Singleton):
 
         return os.path.join(self.path_app_api, file_name)
 
-    def check_path(self, path: str, force: bool) -> bool:
+    def check_path(self) -> bool:
+        
+        
+        if os.path.exists(self.to_path):
 
-        if os.path.exists(path):
-            if force:
-                print(f"[ W ] >> el path {path} se va eliminar primero")
-                shutil.rmtree(path)
+            if self.update:
+                print(f"[ W ] >> el path {self.to_path} se va a actualizar")
                 return True
 
-            print(f"[ E ] >> el path {path} existe, usa -f / --force para borrarlo")
+
+            if self.force or self.update:
+                print(f"[ W ] >> el path {self.to_path} se va eliminar primero")
+                shutil.rmtree(self.to_path)
+                return True
+
+
+            print(f"[ E ] >> el path {self.to_path} existe, usa:\n \t -f [ --force ] para borrarlo\n \t -u [ --update ] si se trata de un update")
             return False
 
         return True
@@ -87,10 +100,15 @@ class Paths(metaclass=Singleton):
         os.mkdir(path)
         os.chdir(path)
     
+    
     def abspath(self, relative_path: str) -> str:
         """
         retorna el path absoluto en base al path de bfactory
         """
         import bfactory
         return os.path.join(os.path.dirname(bfactory.__file__), relative_path)
+    
+    
+    def is_an_update(self):
+        return self.update
         

@@ -1,45 +1,59 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 
-from bfactory.utils.paths import Paths
+from bfactory.cli.django_cli import DjangoCli
+from bfactory.utils.state import State
 from bfactory.core.engine import Engine
 from bfactory.inputs.arguments import parser
 from bfactory.inputs.manifest import Manifest
-from bfactory.startproject.startproject import StartProject
 
-fpaths = Paths()
+
 
 def main():
 
+    
     args = parser.parse_args()
 
-    manifest = getattr(args, 'manifest')
-    to_path = getattr(args, 'path')
-    force = getattr(args, 'force', None) != None
-    run_api = getattr(args, 'run', None) != None
-   
-    if not manifest or not to_path:
-        parser.print_help()
-        exit(1)
+    state = State()    
+    state.to_path = getattr(args, 'path', None)
+    state.update = getattr(args, 'update', None) != None 
+    state.force = getattr(args, 'force', None) != None
+    state.run_api = getattr(args, 'run', None) != None
+    state.template = getattr(args, 'template', None)
+    state.create_admin = getattr(args, 'createadmin', None) != None
 
-    if not fpaths.check_path(to_path, force):
-        exit(2)
+    manifest = getattr(args, 'manifest', None)
+    
+    if not manifest or not state.to_path:
+        parser.print_help()
+        return False
+
+    if not state.check_path():
+        return False
 
     try:
 
-        manifest = Manifest(manifest.name)
-        fpaths.manifest = manifest
-        fpaths.to_path = to_path
+        state.manifest = Manifest(manifest.name)
 
-        engine = Engine(manifest=manifest)
+        engine = Engine()
+        api_created = engine.create_api()
+
+        if api_created:
+            django_cli = DjangoCli(engine=engine)
+            if state.is_an_update():
+                django_cli.update()
+
+            if state.create_admin:
+                django_cli.create_admin()
+
+            if state.run_api:
+                django_cli.run()
         
-        if engine.create_api() and run_api:
-            sp = StartProject(engine=engine)
-            sp.run()
 
     except Exception as e:
         print(f"[ E ] >> {e}")
         exit(3)
+
 
 
 

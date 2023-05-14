@@ -2,7 +2,7 @@
     models.CharField(max_length=128 {% if not field.req %}, null=True, blank=True {% endif %})
 {% endif %}
 {%- if field.type == 'text'  -%}
-    models.TextField({% if not field.req %}, null=True, blank=True {% endif %})
+    models.TextField({% if not field.req %} null=True, blank=True {% endif %})
 {% endif %}
 {%- if field.type == 'bool' -%}
     models.BooleanField({% if not field.req %} default=False {% endif %})
@@ -13,7 +13,7 @@
 {%- if field.type == 'int' -%}
     models.IntegerField({% if not field.req %}null=True, blank=True{% endif %})
 {% endif %}
-{%- if field.type == 'float' -%}
+{%- if field.type == 'decimal' -%}
     models.DecimalField(max_digits=10, decimal_places=2{% if not field.req %}, null=True, blank=True{% endif %})
 {% endif %}
 {%- if field.type == 'pint' -%}

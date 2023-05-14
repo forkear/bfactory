@@ -3,25 +3,25 @@ import unittest
 
 from bfactory.inputs.manifest import Manifest
 from bfactory.core.engine import Engine
-from bfactory.utils.paths import Paths
+from bfactory.utils.state import State
 
-fpaths = Paths()
+state = State()
 
 class EngineTest(unittest.TestCase):
 
     @classmethod
     def setUp(self):
-        to_path = '/tmp/test_bfactory'
-        if not fpaths.check_path(to_path, force=True):
+        state.to_path = '/tmp/test_bfactory'
+        state.force = True
+        if not state.check_path():
             exit(2)
         
-        self.manifest_path = fpaths.abspath('tests/manifest_test.json')
+        self.manifest_path = state.abspath('tests/manifest_test.json')
         self.manifest = Manifest(file_path_manifest=self.manifest_path)
         
-        fpaths.manifest = self.manifest    
-        fpaths.to_path = to_path
+        state.manifest = self.manifest    
         
-        self.engine = Engine(manifest=self.manifest)
+        self.engine = Engine()
 
     def test_model_creation(self):
         self.engine.create_api()

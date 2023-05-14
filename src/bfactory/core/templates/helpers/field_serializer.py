@@ -19,7 +19,7 @@
 {%- if field.type == 'datetime' -%}
     serializers.DateTimeField()
 {% endif %}
-{%- if field.type == 'float' -%}
+{%- if field.type == 'decimal' -%}
     serializers.DecimalField(max_digits=10, decimal_places=2)
 {% endif %}
 {%- if field.type == 'user' or field.type == 'owner' -%}

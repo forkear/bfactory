@@ -2,14 +2,14 @@
 import unittest
 
 from bfactory.inputs.manifest import Manifest
-from bfactory.utils.paths import Paths
-fpaths = Paths()
+from bfactory.utils.state import State
+state = State()
 
 class ManifestTest(unittest.TestCase):
 
     @classmethod
     def setUp(self):
-        self.manifest_path = fpaths.abspath('tests/manifest_test.json')
+        self.manifest_path = state.abspath('tests/manifest_test.json')
         self.manifest = Manifest(file_path_manifest=self.manifest_path)
 
     def test_version(self):

@@ -11,9 +11,9 @@ from bfactory.inputs.manifest import Manifest
 from bfactory.config.settings import URL_BASE_BACKEND
 from bfactory.utils.render import render_to_file
 from bfactory.utils.crypto import get_random_secret_key
-from bfactory.utils.paths import Paths
+from bfactory.utils.state import State
 
-fpaths = Paths()
+state = State()
 
 
 def get_zip_base_project(slug: str, path: str = None) -> bool:
@@ -27,7 +27,7 @@ def get_zip_base_project(slug: str, path: str = None) -> bool:
 
     print("> descargando main.zip")
     if not path:
-        path = fpaths.base_path
+        path = state.base_path
 
     resp = urlopen(URL_BASE_BACKEND)
 
@@ -73,7 +73,7 @@ def crear_configuracion_del_proyecto(manifest: Manifest) -> bool:
         'auth': manifest.auth,
     }
     render_to_file(template='myconf.py',
-                   file_name=fpaths.path_myconf, values=values)
+                   file_name=state.path_myconf, values=values)
     return True
 
 

@@ -5,7 +5,6 @@ import argparse
 import pathlib
 import textwrap
 
-
 class TestAction(argparse.Action):
 
     def __init__(self, option_strings, dest, nargs=None, **kwargs):
@@ -23,7 +22,7 @@ parser = argparse.ArgumentParser(
     prog='bfactory',
     formatter_class=argparse.RawDescriptionHelpFormatter,
     #description=textwrap.dedent(TITLE_BANNER),
-    epilog='thx to:\n\tPython\n\tDjango\n\tJinja\n\tDjango REST framework',
+    epilog='//thx_to = [ Python, Django, Jinja, Django REST framework ]\n',
 )
 
 
@@ -61,6 +60,14 @@ parser.add_argument(
     required=False
 )
 
+parser.add_argument(
+    '--update',
+    '-u',
+    nargs='*',
+    help='Actualiza la aplicacion',
+    required=False
+)
+
 
 parser.add_argument(
     '--run',
@@ -68,6 +75,24 @@ parser.add_argument(
     nargs='*',
     type=pathlib.Path,
     help='Ejecuta localmente la api luego de crearla',
+    required=False
+)
+
+parser.add_argument(
+    '--template',
+    '-t',
+    type=pathlib.Path,
+    help='definir el path o url del template base para crear la api',
+    required=False
+)
+
+
+parser.add_argument(
+    '--createadmin',
+    '-a',
+    nargs='*',
+    type=ManifestFileType(),
+    help='Crea el usuario admin',
     required=False
 )
 

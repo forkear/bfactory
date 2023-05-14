@@ -15,7 +15,6 @@
         [
             {   
                 "name":"Tarea",
-                "perm":"700",
                 "attrs":[
                     {
                         "name":"descripcion",
