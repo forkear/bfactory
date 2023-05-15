@@ -21,9 +21,8 @@ def main():
     state.run_api = getattr(args, 'run', None) != None
     state.template = getattr(args, 'template', None)
     state.create_admin = getattr(args, 'createadmin', None) != None
-
     manifest = getattr(args, 'manifest', None)
-    
+
     if not manifest or not state.to_path:
         parser.print_help()
         return False

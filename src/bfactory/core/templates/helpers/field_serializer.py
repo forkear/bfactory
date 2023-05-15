@@ -19,6 +19,9 @@
 {%- if field.type == 'datetime' -%}
     serializers.DateTimeField()
 {% endif %}
+{%- if field.type == 'date' -%}
+    serializers.DateField()
+{% endif %}
 {%- if field.type == 'decimal' -%}
     serializers.DecimalField(max_digits=10, decimal_places=2)
 {% endif %}

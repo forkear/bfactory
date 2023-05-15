@@ -23,5 +23,8 @@
     models.ForeignKey("{{field.fk}}", related_name="{{model.name|lower}}_{{field.name|lower}}_{{field.fk|lower}}", on_delete=models.CASCADE{% if not field.req %},null=True, blank=True{% endif %})
 {% endif %}
 {%- if field.type == 'datetime' -%}
-    models.DateTimeField({% if field.default == 'now' %}auto_now=True{% endif %}{% if not field.req %}, null=True, blank=True {% endif %})
+    models.DateTimeField({% if field.auto_now %}auto_now=True{% else %}auto_now=False{% endif %}{% if not field.req %}, null=True, blank=True {% endif %})
+{% endif %}
+{%- if field.type == 'date' -%}
+    models.DateField({% if field.auto_now %}auto_now=True{% else %}auto_now=False{% endif %}{% if not field.req %}, null=True, blank=True {% endif %})
 {% endif %}

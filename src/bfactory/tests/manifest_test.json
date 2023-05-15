@@ -1,40 +1,81 @@
 {
-    "name":"Todo App",
+    "name": "BookStore",
     "version": "1",
     "auth": "jwt",
-    
-    "database":{
-        "type":"sqlite",
-        "name":"database.sqlite",
-        "username":"",
-        "password":"",
-        "host":"",
-        "port":""        
+    "database": {
+        "type": "sqlite",
+        "name": "database.sqlite",
+        "username": "",
+        "password": "",
+        "host": "",
+        "port": ""
     },
-    "schema":
-        [
-            {   
-                "name":"Tarea",
-                "attrs":[
-                    {
-                        "name":"descripcion",
-                        "type":"str",
-                        "req":true,
-                        "default":""
-                    },
-                    {
-                        "name":"realizada",
-                        "type":"bool",
-                        "req":false,
-                        "default":false
-                    },
-                    {
-                        "name":"usuario",
-                        "type":"owner",
-                        "req":true,
-                        "default":""
-                    }
-                ]
-            }
-        ]
+    "schema": [
+        {
+            "name": "Author",
+            "attrs": [
+                {
+                    "name": "name",
+                    "type": "str",
+                    "req": true
+                }
+            ]
+        },
+        {
+            "name": "Book",
+            "attrs": [
+                {
+                    "name": "title",
+                    "type": "str",
+                    "req": true
+                },
+                {
+                    "name": "isbn",
+                    "type": "str",
+                    "req": false
+                },
+                {
+                    "name": "author",
+                    "type": "fk",
+                    "req": true,
+                    "fk": "Author"
+                },
+                {
+                    "name": "published",
+                    "type": "date",
+                    "req": true,
+                    "auto_now": false
+                }
+            ]
+        },
+        {
+            "name": "Todo",
+            "attrs": [
+                {
+                    "name": "task",
+                    "type": "str",
+                    "req": true,
+                    "default": ""
+                },
+                {
+                    "name": "completed",
+                    "type": "bool",
+                    "req": false,
+                    "default": false
+                },
+                {
+                    "name": "created",
+                    "type": "datetime",
+                    "req": true,
+                    "auto_now": true
+                },
+                {
+                    "name": "owner",
+                    "type": "owner",
+                    "req": true,
+                    "default": ""
+                }
+            ]
+        }
+    ]
 }

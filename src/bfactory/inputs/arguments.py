@@ -55,7 +55,6 @@ parser.add_argument(
     '--force',
     '-f',
     nargs='*',
-    type=pathlib.Path,
     help='Si existe Path destino lo borra',
     required=False
 )
@@ -91,7 +90,6 @@ parser.add_argument(
     '--createadmin',
     '-a',
     nargs='*',
-    type=ManifestFileType(),
     help='Crea el usuario admin',
     required=False
 )

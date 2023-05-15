@@ -3,7 +3,7 @@
 
 from django.db import models
 from django.contrib.auth.models import User
-from datetime import datetime
+from datetime import datetime, date
 
 {% for model in models %}
 class {{model.name}}(models.Model):

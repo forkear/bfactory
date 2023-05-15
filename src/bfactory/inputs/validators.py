@@ -4,6 +4,10 @@ import os
 from typing import List
 import json 
 import argparse
+from jsonschema import Draft202012Validator, ErrorTree, SchemaError, ValidationError, validate
+
+from bfactory.utils.state import State
+
 
 V_ENTORNO = [
     "BFACTORY_BUILD_PATH",
@@ -33,6 +37,11 @@ def validar_manifiesto(file_name:str) -> bool:
         TODO:
             - validar la estructura del manifiesto
     """
+    state = State()
+    manifest = {}
+    schema = {}
+    jsonschema_path = state.abspath('inputs/manifest.schema.json')
+
 
     #verifico si existe el archivo:
     if not os.path.exists(file_name):
@@ -41,20 +50,39 @@ def validar_manifiesto(file_name:str) -> bool:
 
     try:
         with open(file_name) as f:
-            json.load(f)
+            manifest = json.load(f)
         f.close()
     except Exception as e:
         
         print("[ E ] >> El archivo de manifiesto no es un JSON valido")
         return False 
 
-    return True     
+    try:
+        
+        with open(jsonschema_path) as sf:
+            schema = json.load(sf)
+        sf.close()
+        validator = Draft202012Validator(schema=schema)
+        errors = list(validator.iter_errors(manifest))
+        if not errors:
+            return True 
+        
+        print("[ E ] >> El manifiesto no es valido")
+        for error in errors:
+            print(error.message)
+
+        return False    
+    
+    except ValidationError as ve:
+        print("[ E ] >> El archivo de manifiesto valido")
+        return False
 
 
 class ManifestFileType(argparse.FileType):
 
     def __call__(self, filename):
+        
         resp = super(ManifestFileType, self).__call__(filename)
-        if not validar_manifiesto(filename):
+        if not validar_manifiesto(file_name=filename):
             raise argparse.ArgumentTypeError('No es un manifiesto valido')
         return resp 

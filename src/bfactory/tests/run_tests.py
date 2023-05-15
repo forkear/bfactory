@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import unittest
 
+from bfactory.tests.jsonschema_test import JsonSchemaTest
 from bfactory.tests.manifest_test import ManifestTest
 from bfactory.tests.engine_tests import EngineTest
 
@@ -20,9 +21,12 @@ def create_suite(classes, unit_tests_to_run):
                 suite.addTest( _class( function_name ) )
     return suite
 
+
+
 def run_tests() -> bool:
     runner = unittest.TextTestRunner()
     classes =  [
+        JsonSchemaTest, 
         ManifestTest,
         EngineTest,
     ]

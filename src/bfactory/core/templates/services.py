@@ -5,7 +5,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db import transaction
-from datetime import datetime
+from datetime import datetime, date
 
 {% for model in models %}from .models import {{model.name}}
 {% endfor %}

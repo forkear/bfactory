@@ -111,12 +111,13 @@ Below is a table with all the types of fields currently supported by bfactory
 | text     | TextField             |
 | bool     | BooleanField          |
 | user     | ForeignKey            |
+| owner    | ForeignKey            |
 | int      | IntegerField          |
 | pint     | PositiveIntegerField  |
 | decimal  | DecimalField          |
 | fk       | ForeignKey            |
 | datetime | DateTimeField         |
-
+| date     | DateField             |
 
 ### Additional attributes:
 
@@ -150,6 +151,19 @@ Below is a table with all the types of fields currently supported by bfactory
 | default  | the name of the object it relates | "NameOfTheModel" |
 
 
+## datetime 
+
+| Name      |  Description                      |   Value          |
+| ----------|-----------------------------------|------------------| 
+| auto_now  | the default date and time | true/false  |
+
+## date 
+
+| Name      |  Description                      |   Value          |
+| ----------|-----------------------------------|------------------| 
+| auto_now  | the default date and time | true/false  |
+
+
 ## user     
 
 ## owner
@@ -159,12 +173,3 @@ Below is a table with all the types of fields currently supported by bfactory
 ## pint     
 
 ## decimal  
-
-
-## datetime 
-
-| Name     |  Description                      |   Value          |
-| ---------|-----------------------------------|------------------| 
-| default  | the default date and time | "now"  |
-
-
